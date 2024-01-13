@@ -22,7 +22,7 @@ class Program
             }
         }
 
-        // Part 1: Compute the sum
+
         int sum = 0;
         foreach (int number in numbers)
         {
