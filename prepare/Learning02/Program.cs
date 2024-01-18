@@ -1,45 +1,78 @@
 using System;
 
-class Program
+public class Job
 {
-    static void Main(string[] args)
+    // Member variables
+    private string _jobTitle;
+    private string _company;
+    private int _startYear;
+    private int _endYear;
+
+    // Constructor
+    public Job(string jobTitle, string company, int startYear, int endYear)
     {
-        Job job1 = new Job();
-        job1.JobTitle = "Software Engineer"; // Corrected syntax
-        job1.Company = "Microsoft"; // Corrected syntax
-        job1.StartYear = 2019;
-        job1.EndYear = 2022;
-
-        Job job2 = new Job();
-        job2.JobTitle = "Manager"; // Corrected syntax
-        job2.Company = "Apple"; // Corrected syntax
-        job2.StartYear = 2022;
-        job2.EndYear = 2023;
-
-        Resume myResume = new Resume();
-        myResume.Name = "Allison Rose"; // Corrected syntax
-
-        myResume.Jobs.Add(job1); // Corrected syntax
-        myResume.Jobs.Add(job2); // Corrected syntax
-
-        myResume.Display();
+        _jobTitle = jobTitle;
+        _company = company;
+        _startYear = startYear;
+        _endYear = endYear;
     }
-}
 
-class Job
-{
-    public string JobTitle { get; set; }
-    public string Company { get; set; }
-    public int StartYear { get; set; }
-    public int EndYear { get; set; }
-}
-
-class Resume
-{
-    public string Name { get; set; }
-    public List<Job> Jobs { get; set; } = new List<Job>(); // Added initialization
+    // Display method
     public void Display()
     {
-        // Display resume information
+        Console.WriteLine($"{_jobTitle} ({_company}) {_startYear}-{_endYear}");
+    }
+}
+public class Resume
+{
+    // Member variables
+    private string _personName;
+    private List<Job> _jobs;
+
+    // Constructor
+    public Resume(string personName)
+    {
+        _personName = personName;
+        _jobs = new List<Job>();
+    }
+
+    // AddJob method
+    public void AddJob(Job job)
+    {
+        _jobs.Add(job);
+    }
+
+    // Display method
+    public void Display()
+    {
+        Console.WriteLine($"Name: {_personName}");
+        Console.WriteLine("Jobs:");
+        foreach (var job in _jobs)
+        {
+            job.Display();
+        }
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        // Create jobs
+        Job job1 = new Job("Software Engineer", "Microsoft", 2019, 2022);
+        Job job2 = new Job("Manager", "Apple", 2022, 2023);
+
+        // Display jobs
+        job1.Display();
+        job2.Display();
+
+        // Create resume
+        Resume myResume = new Resume("Allison Rose");
+
+        // Add jobs to resume
+        myResume.AddJob(job1);
+        myResume.AddJob(job2);
+
+        // Display resume
+        myResume.Display();
     }
 }
